@@ -1,0 +1,224 @@
+button::-moz-focus-inner {
+  border: 0; }
+
+h1 {
+  background-color: red; }
+
+div {
+  border-color: #333333; }
+
+.simon-game {
+  border-radius: 50%;
+  border: 20px solid #333333;
+  width: 400px;
+  height: 400px;
+  position: relative;
+  margin: 0;
+  box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.5); }
+
+.SimonBigButton {
+  position: absolute;
+  border: 10px solid #333333;
+  width: 210px;
+  height: 210px;
+  font-family: 'Tangerine', serif;
+  font-size: 42px;
+  font-weight: 900;
+  padding: 0;
+  display: block; }
+
+.SimonBigButton:focus {
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.SimonBigButton:hover {
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.SimonBigButton:active {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.SimonBigButton--lu {
+  left: -10px;
+  top: -10px;
+  border-top-left-radius: 100%;
+  background-color: #00A74A; }
+
+.SimonBigButton--ru {
+  right: -10px;
+  top: -10px;
+  border-top-right-radius: 100%;
+  background-color: #9F0F17; }
+
+.SimonBigButton--ld {
+  left: -10px;
+  bottom: -10px;
+  border-bottom-left-radius: 100%;
+  background-color: #CCA707; }
+
+.SimonBigButton--rd {
+  right: -10px;
+  bottom: -10px;
+  border-bottom-right-radius: 100%;
+  background-color: #094A8F; }
+
+.SimonBigButton--lu:active {
+  background-color: #0eff79; }
+
+.SimonBigButton--ru:active {
+  background-color: #eb2934; }
+
+.SimonBigButton--ld:active {
+  background-color: #f8d641; }
+
+.SimonBigButton--rd:active {
+  background-color: #0f7cef; }
+
+.SimonBigButton--lu__active {
+  background-color: #0eff79; }
+
+.SimonBigButton--ru__active {
+  background-color: #eb2934; }
+
+.SimonBigButton--ld__active {
+  background-color: #f8d641; }
+
+.SimonBigButton--rd__active {
+  background-color: #0f7cef; }
+
+.SimonPannel {
+  width: 200px;
+  height: 200px;
+  border: 10px solid #333333;
+  border-radius: 50%;
+  position: absolute;
+  top: 90px;
+  left: 90px;
+  background-color: #ECE7EE;
+  font-family: "Alfa Slab One", sans-serif;
+  font-size: 42px;
+  font-weight: normal;
+  font-style: normal; }
+
+.SimonPannelContainer {
+  height: 160px;
+  width: 160px;
+  left: 20px;
+  top: 30px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #333333; }
+
+.SimonPannelContainer--row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: stretch; }
+
+.SimonPannelCounter {
+  border: 3px solid #333333;
+  height: 30px;
+  width: 50px;
+  border-radius: 3px;
+  background-color: #32050C;
+  font-family: "VT323", monospace;
+  font-size: 30px;
+  color: #DC0D29;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.SimonPannelCounter--anim {
+  animation: CounterBlink 1.5s step-start 0s infinite; }
+
+@keyframes CounterBlink {
+  50% {
+    opacity: 0.0; } }
+
+.SimonPannel__label {
+  font-family: Arial,sans;
+  font-size: 10px;
+  margin: 3px;
+  text-align: center; }
+
+.SimonPannelButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; }
+
+.SimonPannelButton__indicator {
+  border: 1px solid #333333;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%; }
+
+.SimonPannelButton__indicator--off {
+  background-color: #32050C; }
+
+.SimonPannelButton__indicator--on {
+  background-color: #DC0D29; }
+
+.SimonPannelButton__indicator--hidden {
+  opacity: 0; }
+
+.SimonPannelButton__btn {
+  border: 3px solid #333333;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.5); }
+
+.SimonPannelButton__btn:focus {
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.SimonPannelButton__btn:hover {
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.SimonPannelButton__btn:active {
+  box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.9);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.SimonPannelSwitch {
+  display: flex;
+  align-items: middle; }
+
+.SimonPannelSwitch__btn {
+  border: 1px solid #333333;
+  height: 18px;
+  width: 36px;
+  border-radius: 2px;
+  position: relative;
+  background-color: #222222; }
+
+.SimonPannelSwitch__btn > div {
+  width: 16px;
+  height: 16px;
+  background-color: blue;
+  border: 1px solid #333333;
+  border-radius: 2px;
+  position: absolute;
+  transition: left 300ms; }
+
+.SimonPannelSwitch__btn--off {
+  left: 0; }
+
+.SimonPannelSwitch__btn--on {
+  left: 17px; }

@@ -1,0 +1,241 @@
+$simon-width: 400px;
+$simon-border-width: 20px;
+$simon-pannel-border-width: 10px;
+$simon-pannel-width: 200px;
+$simon-pannel-container-height: 160px;
+$simon-pannel-container-width: 160px;
+$simon-pannel-switch-size: 16px;
+
+$simon-lu-color: #00A74A;
+$simon-ru-color: #9F0F17;
+$simon-ld-color: #CCA707;
+$simon-rd-color: #094A8F;
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+h1 {
+    background-color: red
+}
+div {
+  border-color: #333333;
+}
+.simon-game {
+  border-radius: 50%;
+  border: $simon-border-width solid #333333;
+  width: $simon-width;
+  height: $simon-width;
+  position: relative;
+  margin: 0;
+  box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.5);
+}
+
+.SimonBigButton {
+  position: absolute;
+  border: $simon-pannel-border-width solid #333333;
+  width: $simon-width/2 + $simon-pannel-border-width;
+  height: $simon-width/2 + $simon-pannel-border-width;
+  font-family: 'Tangerine', serif;
+  font-size: 42px;
+  font-weight: 900;
+  padding: 0;
+  display: block;
+}
+.SimonBigButton:focus {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.SimonBigButton:hover {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.SimonBigButton:active {
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.SimonBigButton--lu {
+  left: -$simon-pannel-border-width;
+  top: -$simon-pannel-border-width;
+  border-top-left-radius: 100%;
+  background-color: $simon-lu-color;
+}
+.SimonBigButton--ru {
+  right: -$simon-pannel-border-width;
+  top: -$simon-pannel-border-width;
+  border-top-right-radius: 100%;
+  background-color: $simon-ru-color;
+}
+.SimonBigButton--ld {
+  left: -$simon-pannel-border-width;
+  bottom: -$simon-pannel-border-width;
+  border-bottom-left-radius: 100%;
+  background-color: $simon-ld-color;
+}
+.SimonBigButton--rd {
+  right: -$simon-pannel-border-width;
+  bottom: -$simon-pannel-border-width;
+  border-bottom-right-radius: 100%;
+  background-color: $simon-rd-color;
+}
+.SimonBigButton--lu:active {
+  background-color: lighten($simon-lu-color, 20%);
+}
+.SimonBigButton--ru:active {
+  background-color: lighten($simon-ru-color, 20%);
+}
+.SimonBigButton--ld:active {
+  background-color: lighten($simon-ld-color, 20%);
+}
+.SimonBigButton--rd:active {
+  background-color: lighten($simon-rd-color, 20%);
+}
+.SimonBigButton--lu__active {
+  background-color: lighten($simon-lu-color, 20%);
+}
+.SimonBigButton--ru__active {
+  background-color: lighten($simon-ru-color, 20%);
+}
+.SimonBigButton--ld__active {
+  background-color: lighten($simon-ld-color, 20%);
+}
+.SimonBigButton--rd__active {
+  background-color: lighten($simon-rd-color, 20%);
+}
+.SimonPannel {
+  width: $simon-pannel-width;
+  height: $simon-pannel-width;
+  border: $simon-pannel-border-width solid #333333;
+  border-radius: 50%;
+  position: absolute;
+  top: $simon-pannel-width/2 - $simon-pannel-border-width;
+  left: $simon-pannel-width/2 - $simon-pannel-border-width;
+  background-color: #ECE7EE;
+  font-family: "Alfa Slab One", sans-serif;
+  font-size: 42px;
+  font-weight: normal;
+  font-style: normal;
+}
+.SimonPannelContainer {
+  height: $simon-pannel-container-height;
+  width: $simon-pannel-container-width;
+  left: ($simon-pannel-width - $simon-pannel-container-width)/2;
+  top: ($simon-pannel-width - $simon-pannel-container-height)/2 + 10;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #333333;
+}
+.SimonPannelContainer--row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: stretch;
+}
+.SimonPannelCounter {
+  border: 3px solid #333333;
+  height: 30px;
+  width: 50px;
+  border-radius: 3px;
+  background-color: #32050C;
+  font-family: "VT323", monospace;
+  font-size: 30px;
+  color: #DC0D29;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SimonPannelCounter--anim {
+  animation: CounterBlink 1.5s step-start 0s infinite;
+}
+@keyframes CounterBlink {
+  50% {
+    opacity: 0.0
+  }
+}
+.SimonPannel__label {
+  font-family: Arial,sans;
+  font-size: 10px;
+  margin: 3px;
+  text-align: center;
+}
+.SimonPannelButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.SimonPannelButton__indicator {
+  border: 1px solid #333333;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.SimonPannelButton__indicator--off {
+  background-color: #32050C;
+}
+.SimonPannelButton__indicator--on {
+  background-color: #DC0D29;
+}
+.SimonPannelButton__indicator--hidden {
+  opacity: 0;
+}
+.SimonPannelButton__btn {
+  border: 3px solid #333333;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.5);
+}
+.SimonPannelButton__btn:focus {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.SimonPannelButton__btn:hover {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.SimonPannelButton__btn:active {
+    box-shadow: inset 0px 1px 1px 0px rgba(0,0,0,0.9);
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.SimonPannelSwitch {
+  display: flex;
+  align-items: middle;
+}
+.SimonPannelSwitch__btn {
+  border: 1px solid #333333;
+  height: $simon-pannel-switch-size+2;
+  width: ($simon-pannel-switch-size+2)*2;
+  border-radius: 2px;
+  position: relative;
+  background-color: #222222;
+  > div {
+    width: $simon-pannel-switch-size;
+    height: $simon-pannel-switch-size;
+    background-color: blue;
+    border: 1px solid #333333;
+    border-radius: 2px;
+    position: absolute;
+    transition: left 300ms;
+  }
+}
+.SimonPannelSwitch__btn--off {
+  left: 0;
+}
+.SimonPannelSwitch__btn--on {
+  left: $simon-pannel-switch-size+1;
+}
