@@ -1,8 +1,8 @@
 {
-  "name": "simongame1",
+  "name": "SimonGame",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://szomolanyi.github.io/simongame1",
+  "homepage": "https://szomolanyi.github.io/SimonGame",
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
