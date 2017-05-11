@@ -2,6 +2,17 @@
 
 import { combineReducers } from 'redux';
 
+//audio
+const simon_audio = {
+  'lu': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
+  'ru': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
+  'ld': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
+  'rd': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
+};
+export const simon_play = (type) => {
+  simon_audio[type].play();
+};
+
 // action creators
 export const gameSwitch = () => {
   return {

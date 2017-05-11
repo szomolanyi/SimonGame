@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { gameSwitch, strictSwitch, startGame, thunkPlayerTurn } from './state';
+import { gameSwitch, strictSwitch, startGame, thunkPlayerTurn, simon_play } from './state';
 
 const SimonBigButton = ({type, is_on, is_active, onClick, onmousedown}) => {
     let cls;
@@ -106,23 +106,28 @@ const playSound = (snd) => {
   audio.play();
 }
 
-const SimonGame = ({gameState, onBigButton}) => (
+const SimonGame = ({gameState, onBigButton}) => {
+  if (gameState.btn_active) {
+    simon_play(gameState.btn_active); //play 
+  }
+  return (
   <div className='simon-game'>
     <SimonBigButton type="lu" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'lu'}
       onClick={onBigButton.bind(this, 'lu')}
-      onmousedown={playSound.bind(this, 'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3')} />
+      onmousedown={simon_play.bind(this, 'lu')} />
     <SimonBigButton type="ru" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ru'}
       onClick={onBigButton.bind(this, 'ru')}
-      onmousedown={playSound.bind(this, 'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3')} />
+      onmousedown={simon_play.bind(this, 'ru')} />
     <SimonBigButton type="ld" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ld'}
       onClick={onBigButton.bind(this, 'ld')}
-      onmousedown={playSound.bind(this, 'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3')} />
+      onmousedown={simon_play.bind(this, 'ld')} />
     <SimonBigButton type="rd" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'rd'}
       onClick={onBigButton.bind(this, 'rd')}
-      onmousedown={playSound.bind(this, 'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3')} />
+      onmousedown={simon_play.bind(this, 'rd')} />
     <SimonPannelContainer />
   </div>
-)
+  )
+}
 
 const mapStateToProps = (state) => {
   return state;
