@@ -101,11 +101,6 @@ const SimonPannelContainer = connect(
   mapSimonPannelDispatchToProps
 )(SimonPannel);
 
-const playSound = (snd) => {
-  let audio = new Audio(snd);
-  audio.play();
-}
-
 const SimonGame = ({gameState, onBigButton, onBigButtonDown}) => {
   if (gameState.btn_active) {
     simon_play(gameState.btn_active); //play

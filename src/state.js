@@ -14,9 +14,18 @@ const simon_audio = {
   'ru': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
   'ld': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
   'rd': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'),
+  playing: []
 };
 export const simon_play = (type) => {
+  simon_audio[type].loop = true;
   simon_audio[type].play();
+  simon_audio.playing.push(type);
+};
+export const simon_play_stop = () => {
+  simon_audio.playing.map(
+    e=>{simon_audio[e].loop=false;}
+  );
+  simon_audio.playing=[];
 };
 
 // action creators
@@ -182,6 +191,7 @@ const initialState = {
 // reducers
 // jshint ignore:start
 const gameState = (state= initialState, action) => {
+  simon_play_stop();
   switch (action.type) {
     case 'SWITCH_GAME':
       if (state.is_on) return { ...initialState };
