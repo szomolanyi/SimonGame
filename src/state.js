@@ -2,12 +2,18 @@
 
 import { combineReducers } from 'redux';
 
+/* TODO :
+- vitazstvo po 20 uspesnych tahoch : zobrazi ** na display a zatrubi
+- zrychlovanie tahov
+- po stlaceni a drzani big buttonu hra ton a zaroven svieti buton
+*/
+
 //audio
 const simon_audio = {
   'lu': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
   'ru': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
   'ld': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
-  'rd': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
+  'rd': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'),
 };
 export const simon_play = (type) => {
   simon_audio[type].play();
@@ -111,7 +117,12 @@ const playerNextTurn = () => {
     type: 'PLAYER_NEXT_TURN',
   };
 };
-
+export const bigButtonDown = (btn_id) => {
+  return {
+    type: 'BIG_BUTTON_DOWN',
+    btn_id
+  };
+};
 export function thunkPlayerTurn(btn_id) {
   return function(dispatch, getState) {
     let state=getState().gameState;
@@ -174,9 +185,9 @@ const gameState = (state= initialState, action) => {
   switch (action.type) {
     case 'SWITCH_GAME':
       if (state.is_on) return { ...initialState };
-      else return { ...state, is_on: !state.is_on, count:'--'};
+      else return { ...state, is_on: !state.is_on, count:'--', btn_active:''};
     case 'SWITCH_STRICT':
-      return { ...state, strict_on: state.is_on ? !state.strict_on : state.strict_on };
+      return { ...state, strict_on: state.is_on ? !state.strict_on : state.strict_on, btn_active:'' };
     case 'INIT_START':
       if (action.init_type === 'start') {
         return { ...state, is_on:true, gstate:'init', count: '--', moves:[], pos:0,
@@ -184,18 +195,21 @@ const gameState = (state= initialState, action) => {
         };
       }
       else {
-        return { ...state, is_on:true, gstate:'init', count: '!!'};
+        return { ...state, is_on:true, gstate:'init', count: '!!', btn_active:''};
       }
     case 'SIMON_ADD_TURN':
-      return { ...state, pos:0, moves: [...state.moves, genTurn()], count:state.moves.length+1, gstate:'simon'};
+      return { ...state, pos:0, moves: [...state.moves, genTurn()], count:state.moves.length+1, gstate:'simon',btn_active:''};
     case 'SIMON_SHOW_TURN_START':
       return {...state, btn_active: action.btn_active, gstate:'simon', count:state.moves.length };
     case 'SIMON_SHOW_TURN_END':
       return {...state, pos:state.pos+1, btn_active: '' };
     case 'PLAYER_TURN_START':
-      return {...state, pos:0, gstate:'player'};
+      return {...state, pos:0, gstate:'player', btn_active:''};
     case 'PLAYER_NEXT_TURN':
-      return {...state, pos:state.pos+1};
+      return {...state, pos:state.pos+1, btn_active:''};
+    case 'BIG_BUTTON_DOWN':
+      simon_play(action.btn_id);
+      return {...state, btn_active: action.btn_id};
     default:
       return state;
   }
