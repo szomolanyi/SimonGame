@@ -9,10 +9,10 @@ import { combineReducers } from 'redux';
 */
 
 // play timeout
-const winTurns = 10;
+const winTurns = 3;
 const MaxTimeout = 1000;
 const MinTimeout = 300;
-const simonTimouetDecrement = Math.round((MaxTimeout-MinTimeout)/winTurns);
+const simonTimouetDecrement = Math.round((MaxTimeout-MinTimeout)/(winTurns+1));
 const simonTimeout = (pos) => {
   let new_t = 1000 - pos*simonTimouetDecrement;
   return new_t;
@@ -216,6 +216,18 @@ const errorSeq = (dispatch, getState, err_i=0) => {
     }
   }
 };
+const bigBtns=['lu','ru','ld','rd'];
+const winSeq= (dispatch, getState, win_i=0, btn_id=0) => {
+  if (getState().gameState.is_on && win_i < 4) {
+    if (btn_id>0) dispatch(simonEndTurn(bigBtns[btn_id]));
+    if (btn_id >= 4)
+      setTimeout(winSeq.bind(this, dispatch, getState, win_i+1, 0), 200);
+    else {
+      dispatch(simonShowTurn(bigBtns[btn_id]));
+      setTimeout(winSeq.bind(this, dispatch, getState, win_i, btn_id+1), 200);
+    }
+  }
+};
 export function thunkPlayerTurn(btn_id) {
   return function(dispatch, getState) {
     dispatch(bigButtonUp(btn_id));
@@ -224,8 +236,14 @@ export function thunkPlayerTurn(btn_id) {
       // successfull turn
       if (state.pos+1 === state.moves.length) {
         //last successfull turn
-        dispatch(simonAddTurn());
-        startSimonShowTurn(dispatch, getState);
+        if (state.pos >= winTurns) {
+          //player win
+          winSeq(dispatch, getState, 0, 0);
+        }
+        else {
+          dispatch(simonAddTurn());
+          startSimonShowTurn(dispatch, getState);
+        }
       }
       else {
         dispatch(playerNextTurn());
