@@ -51,10 +51,9 @@ export const strictSwitch = () => {
     type: 'SWITCH_STRICT'
   };
 };
-export const initStart = (init_type) => {
+export const initStart = () => {
   return {
     type: 'INIT_START',
-    init_type,
   };
 };
 export const simonAddTurn = () => {
@@ -100,7 +99,16 @@ export const strictButtonPress = () => {
     type: 'STRICT_BTN_PRESS'
   };
 };
-
+export const errStateOn = () => {
+  return {
+    type: 'ERROR_ON'
+  };
+};
+export const errStateOff = () => {
+  return {
+    type: 'ERROR_OFF'
+  };
+};
 
 
 
@@ -142,12 +150,12 @@ const genTurn = () => {
 export function thunkStartGame() {
   return function(dispatch, getState) {
     if (getState().gameState.is_on ) {
-      startSequence(dispatch, getState, 'start');
+      startSequence(dispatch, getState);
     }
   };
 }
-function startSequence(dispatch, getState, init_type) {
-  dispatch(initStart(init_type));
+function startSequence(dispatch, getState) {
+  dispatch(initStart());
   setTimeout(function() {
     if (getState().gameState.is_on) {
       dispatch(simonAddTurn());
@@ -185,6 +193,29 @@ function simonShowTurnWrp(dispatch, getState) {
   }, simonTimeout(getState().gameState.moves.length));
 }
 //----
+const errorSeq = (dispatch, getState, err_i=0) => {
+  if (getState().gameState.is_on) {
+    if (err_i === 2) {
+      if (getState().gameState.strict_on) {
+        startSequence(dispatch, getState, 'start');
+      }
+      else {
+        startSimonShowTurn(dispatch, getState);
+      }
+    }
+    else {
+      dispatch(errStateOn());
+      setTimeout(function() {
+        if (getState().gameState.is_on) {
+          dispatch(errStateOff());
+          setTimeout(function() {
+            errorSeq(dispatch, getState, err_i+1);
+          }, 500);
+        }
+      }, 500);
+    }
+  }
+};
 export function thunkPlayerTurn(btn_id) {
   return function(dispatch, getState) {
     dispatch(bigButtonUp(btn_id));
@@ -202,18 +233,7 @@ export function thunkPlayerTurn(btn_id) {
     }
     else {
       // unsuccessfull turn
-      dispatch(initStart('error'));
-      setTimeout(function(){
-        let state=getState().gameState;
-        if (state.is_on) {
-          if (state.strict_on) {
-            startSequence(dispatch, getState, 'start');
-          }
-          else {
-            startSimonShowTurn(dispatch, getState);
-          }
-        }
-      }, 2500);
+      errorSeq(dispatch, getState);
     }
   };
 }
@@ -239,15 +259,14 @@ const gameState = (state= initialState, action) => {
     case 'SWITCH_STRICT':
       return { ...state, strict_on: state.is_on ? !state.strict_on : state.strict_on};
     case 'INIT_START':
-      if (action.init_type === 'start') {
-        return { ...state, is_on:true, gstate:'init', count: '--', moves:[], pos:0,
-          btn_active: '', btns_enabled: false
-        };
-      }
-      else {
-        simon_play('all');
-        return { ...state, is_on:true, gstate:'init', count: '!!', btn_active:'all'};
-      }
+      return { ...state, is_on:true, gstate:'init', count: '--', moves:[], pos:0,
+          btn_active: '', btns_enabled: false };
+    case 'ERROR_ON':
+      simon_play('all');
+      return {...state, btn_active:'all', gstate:'simon', pos:0, count: '!!'};
+    case 'ERROR_OFF':
+      simon_stop_play('all');
+      return {...state, btn_active:''};
     case 'SIMON_ADD_TURN':
       return { ...state, pos:0, moves: [...state.moves, genTurn()], count:state.moves.length+1, gstate:'simon'};
     case 'SIMON_SHOW_TURN_START':
