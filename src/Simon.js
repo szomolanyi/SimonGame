@@ -107,16 +107,16 @@ const SimonGame = ({gameState, onBigButton, onBigButtonDown}) => {
   }
   return (
   <div className='simon-game'>
-    <SimonBigButton type="lu" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'lu'}
+    <SimonBigButton type="lu" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'lu' || gameState.btn_active === 'all'}
       onmouseup={onBigButton.bind(this, 'lu')}
       onmousedown={onBigButtonDown.bind(this, 'lu')} />
-    <SimonBigButton type="ru" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ru'}
+    <SimonBigButton type="ru" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ru' || gameState.btn_active === 'all'}
       onmouseup={onBigButton.bind(this, 'ru')}
       onmousedown={onBigButtonDown.bind(this, 'ru')} />
-    <SimonBigButton type="ld" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ld'}
+    <SimonBigButton type="ld" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ld' || gameState.btn_active === 'all'}
       onmouseup={onBigButton.bind(this, 'ld')}
       onmousedown={onBigButtonDown.bind(this, 'ld')} />
-    <SimonBigButton type="rd" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'rd'}
+    <SimonBigButton type="rd" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'rd' || gameState.btn_active === 'all'}
       onmouseup={onBigButton.bind(this, 'rd')}
       onmousedown={onBigButtonDown.bind(this, 'rd')} />
     <SimonPannelContainer />

@@ -5,8 +5,18 @@ import { combineReducers } from 'redux';
 /* TODO :
 - vitazstvo po 20 uspesnych tahoch : zobrazi ** na display a zatrubi
 - zrychlovanie tahov
-- po stlaceni a drzani big buttonu hra ton a zaroven svieti buton
+- po stlaceni a drzani big buttonu hra ton a zaroven svieti buton : DONE
 */
+
+// play timeout
+const winTurns = 10;
+const MaxTimeout = 1000;
+const MinTimeout = 300;
+const simonTimouetDecrement = Math.round((MaxTimeout-MinTimeout)/winTurns);
+const simonTimeout = (pos) => {
+  let new_t = 1000 - pos*simonTimouetDecrement;
+  return new_t;
+};
 
 //audio
 const simon_audio = {
@@ -16,12 +26,17 @@ const simon_audio = {
   'rd': new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'),
 };
 export const simon_play = (type) => {
-  simon_audio[type].loop = true;
-  simon_audio[type].play();
+  //simon_audio[type].loop = true;
+  if (type==='all') {
+    Object.keys(simon_audio).forEach((e)=>{simon_audio[e].play();});
+  }
+  else {
+    simon_audio[type].play();
+  }
 };
 export const simon_stop_play = (type) => {
   /* prepared for audio web api */
-  simon_audio[type].loop = false;
+  //simon_audio[type].loop = false;
   return;
 };
 
@@ -161,13 +176,13 @@ function simonShowTurnWrp(dispatch, getState) {
         setTimeout(function(){
           if (isSimonPlay(getState))
             simonShowTurnWrp(dispatch, getState);
-        },1000);
+        },simonTimeout(getState().gameState.moves.length));
       }
       else {
         dispatch(playerTurnStart());
       }
     }
-  }, 1000);
+  }, simonTimeout(getState().gameState.moves.length));
 }
 //----
 export function thunkPlayerTurn(btn_id) {
@@ -203,6 +218,7 @@ export function thunkPlayerTurn(btn_id) {
   };
 }
 
+
 const initialState = {
   is_on: false,
   strict_on: false,
@@ -229,7 +245,8 @@ const gameState = (state= initialState, action) => {
         };
       }
       else {
-        return { ...state, is_on:true, gstate:'init', count: '!!', btn_active:''};
+        simon_play('all');
+        return { ...state, is_on:true, gstate:'init', count: '!!', btn_active:'all'};
       }
     case 'SIMON_ADD_TURN':
       return { ...state, pos:0, moves: [...state.moves, genTurn()], count:state.moves.length+1, gstate:'simon'};
