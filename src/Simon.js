@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { gameSwitch, strictSwitch, startGame, thunkPlayerTurn, simon_play, bigButtonDown } from './state';
+import { gameSwitch, strictSwitch, thunkStartGame, thunkPlayerTurn, simon_play, bigButtonDown } from './state';
 
 const SimonBigButton = ({type, is_on, is_active, onmouseup, onmousedown}) => {
     let cls;
@@ -92,7 +92,7 @@ const mapSimonPannelDispatchToProps = (dispatch) => {
       dispatch(strictSwitch())
     },
     onStartClick: () => {
-      dispatch(startGame())
+      dispatch(thunkStartGame())
     }
   };
 };
