@@ -4,13 +4,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { gameSwitch, strictSwitch, thunkStartGame, thunkPlayerTurn, simon_play, bigButtonDown } from './state';
 
-const SimonBigButton = ({type, is_on, is_active, onmouseup, onmousedown}) => {
+const SimonBigButton = ({type, is_on, is_active, onClick, onmousedown}) => {
     let cls;
     if (is_active)
       cls= `SimonBigButton SimonBigButton--${type} SimonBigButton--${type}__active`;
     else
       cls= `SimonBigButton SimonBigButton--${type}`;
-    return (<button disabled={!is_on} className={cls} onMouseUp={onmouseup} onMouseDown={onmousedown}></button>);
+    return (<button disabled={!is_on} className={cls} onClick={onClick} onMouseDown={onmousedown}></button>);
 }
 
 
@@ -58,7 +58,7 @@ const SimonPannelSwitch = ({is_on, onMainSwitch}) => {
   );
 }
 
-const SimonPannel = ({gameState, onMainSwitch, onStrictClick, onStartClick}) => (
+const SimonPannel = ({gameState, counterState, onMainSwitch, onStrictClick, onStartClick}) => (
   <div className='SimonPannel'>
     <div className='SimonPannelContainer'>
       <div className='SimonPannelContainer--row'>
@@ -66,7 +66,7 @@ const SimonPannel = ({gameState, onMainSwitch, onStrictClick, onStartClick}) => 
         <div style={{fontSize: 20}}>&reg;</div>
       </div>
       <div className='SimonPannelContainer--row'>
-        <SimonPannelCounter count={gameState.count} init_phase={gameState.gstate==='init'}></SimonPannelCounter>
+        <SimonPannelCounter count={gameState.count} init_phase={counterState}></SimonPannelCounter>
         <SimonPannelButton btncolor='red' label="START" indstate="hidden" onClick={onStartClick} />
         <SimonPannelButton
           btncolor='yellow'
@@ -108,16 +108,16 @@ const SimonGame = ({gameState, onBigButton, onBigButtonDown}) => {
   return (
   <div className='simon-game'>
     <SimonBigButton type="lu" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'lu' || gameState.btn_active === 'all'}
-      onmouseup={onBigButton.bind(this, 'lu')}
+      onClick={onBigButton.bind(this, 'lu')}
       onmousedown={onBigButtonDown.bind(this, 'lu')} />
     <SimonBigButton type="ru" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ru' || gameState.btn_active === 'all'}
-      onmouseup={onBigButton.bind(this, 'ru')}
+      onClick={onBigButton.bind(this, 'ru')}
       onmousedown={onBigButtonDown.bind(this, 'ru')} />
     <SimonBigButton type="ld" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'ld' || gameState.btn_active === 'all'}
-      onmouseup={onBigButton.bind(this, 'ld')}
+      onClick={onBigButton.bind(this, 'ld')}
       onmousedown={onBigButtonDown.bind(this, 'ld')} />
     <SimonBigButton type="rd" is_on={gameState.gstate==='player'} is_active={gameState.btn_active === 'rd' || gameState.btn_active === 'all'}
-      onmouseup={onBigButton.bind(this, 'rd')}
+      onClick={onBigButton.bind(this, 'rd')}
       onmousedown={onBigButtonDown.bind(this, 'rd')} />
     <SimonPannelContainer />
   </div>
