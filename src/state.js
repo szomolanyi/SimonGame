@@ -240,7 +240,7 @@ const errorSeq = (dispatch, getState, err_i=0) => {
     }
   }
 };
-const bigBtns=['lu','ru','ld','rd'];
+const bigBtns=['lu','ru','rd','ld'];
 const winSeq= (dispatch, getState, win_i=0, btn_id=0) => {
   if (getState().gameState.is_on && win_i < 4) {
     if (btn_id>0) dispatch(simonEndTurn(bigBtns[btn_id]));

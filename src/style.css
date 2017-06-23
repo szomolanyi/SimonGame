@@ -209,14 +209,15 @@ div {
   border-radius: 2px;
   position: relative;
   background-color: #222222; }
-  .SimonPannelSwitch__btn > div {
-    width: 16px;
-    height: 16px;
-    background-color: blue;
-    border: 1px solid #333333;
-    border-radius: 2px;
-    position: absolute;
-    transition: left 300ms; }
+
+.SimonPannelSwitch__btn > div {
+  width: 16px;
+  height: 16px;
+  background-color: blue;
+  border: 1px solid #333333;
+  border-radius: 2px;
+  position: absolute;
+  transition: left 300ms; }
 
 .SimonPannelSwitch__btn--off {
   left: 0; }
