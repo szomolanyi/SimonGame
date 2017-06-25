@@ -10,10 +10,20 @@ import thunk from 'redux-thunk';
 
 let store = createStore(simonGame, applyMiddleware(thunk));
 
-const App = () => (
-  <Provider store={store}>
-    <ReduxSimonGame />
-  </Provider>
-)
+const App = () => {
+  let layout = {
+    'display': 'flex',
+    'alignItems': 'center',
+    'justifyContent': 'center',
+    'height':'100vh'
+  };
+  return (
+  <div style={layout  }>
+    <Provider store={store}>
+      <ReduxSimonGame />
+    </Provider>
+  </div>
+  )
+}
 
 export default App;

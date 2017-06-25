@@ -9,7 +9,7 @@ import { combineReducers } from 'redux';
 */
 
 // play timeout
-const winTurns = 3;
+const winTurns = 19;
 const MaxTimeout = 1000;
 const MinTimeout = 300;
 const simonTimouetDecrement = Math.round((MaxTimeout-MinTimeout)/(winTurns+1));

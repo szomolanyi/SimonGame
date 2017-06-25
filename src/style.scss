@@ -84,20 +84,6 @@ div {
   border-bottom-right-radius: 100%;
   background-color: $simon-rd-color;
 }
-.SimonBigButton--lu:active {
-  background-color: lighten($simon-lu-color, 20%);
-}
-/*
-.SimonBigButton--ru:active {
-  background-color: lighten($simon-ru-color, 20%);
-}
-.SimonBigButton--ld:active {
-  background-color: lighten($simon-ld-color, 20%);
-}
-.SimonBigButton--rd:active {
-  background-color: lighten($simon-rd-color, 20%);
-}
-*/
 .SimonBigButton--lu__active {
   background-color: lighten($simon-lu-color, 20%);
 }

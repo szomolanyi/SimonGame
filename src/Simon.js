@@ -10,7 +10,7 @@ const SimonBigButton = ({type, is_on, is_active, onClick, onmousedown}) => {
       cls= `SimonBigButton SimonBigButton--${type} SimonBigButton--${type}__active`;
     else
       cls= `SimonBigButton SimonBigButton--${type}`;
-    return (<button disabled={!is_on} className={cls} onClick={onClick} onMouseDown={onmousedown}></button>);
+    return (<button onTouchStart={onmousedown} disabled={!is_on} className={cls} onClick={onClick} onMouseDown={onmousedown}></button>);
 }
 
 
