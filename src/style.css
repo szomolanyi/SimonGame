@@ -25,7 +25,8 @@ div {
   font-size: 42px;
   font-weight: 900;
   padding: 0;
-  display: block; }
+  display: block;
+  -webkit-tap-highlight-color: transparent; }
 
 .SimonBigButton:focus {
   outline: none;
