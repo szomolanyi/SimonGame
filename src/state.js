@@ -122,34 +122,6 @@ const setLastPlayerTimer = (start_time) => {
 };
 
 
-/*******************************************  thunks ********************
-thunkStarGame :
-  INIT_START
-  SIMON_ADD_TURN
-    SIMON_SHOW_TURN_START
-    SIMON_SHOW_TURN_END
-    ... n krat
-  PLAYER_TURN_START
-
-thunkPlayerTurn:
-  BIG_BUTTON_UP
-  PLAYER_NEXT_TURN
-    or
-
-  BIG_BUTTON_UP
-  SIMON_ADD_TURN
-    SIMON_SHOW_TURN_START
-    SIMON_SHOW_TURN_END
-    ... n krat
-    or
-
-  BIG_BUTTON_UP
-  INIT_START
-    SIMON_SHOW_TURN_START
-    SIMON_SHOW_TURN_END
-    ... n krat
-  PLAYER_TURN_START
-*/
 const genTurn = () => {
   const TURNS = ['lu', 'ru', 'ld', 'rd'];
   let min = Math.ceil(0);
@@ -361,22 +333,3 @@ export const simonGame = combineReducers({
   gameState,
   counterState
 });
-
-
-
-// store
-/*let store = createStore(simonGame);
-
-
-//tests
-console.log(store.getState());
-
-// Every time the state changes, log it
-// Note that subscribe() returns a function for unregistering the listener
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-);
-
-store.dispatch(gameSwitch());
-store.dispatch(gameSwitch());
-*/
