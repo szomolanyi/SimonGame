@@ -19,9 +19,11 @@ const App = () => {
   };
   return (
   <div style={layout  }>
+    <div style={{flex:'0 0 auto'}}>
     <Provider store={store}>
       <ReduxSimonGame />
     </Provider>
+    </div>
   </div>
   )
 }
